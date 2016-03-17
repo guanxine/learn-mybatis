@@ -7,3 +7,13 @@ CREATE TABLE  details.student(
    EMAIL varchar(255) NOT NULL,
    PRIMARY KEY ( ID )
 );
+
+DELIMITER //
+   DROP PROCEDURE IF EXISTS details.read_recordById //
+   CREATE PROCEDURE details.read_recordById (IN emp_id INT)
+
+   BEGIN
+      SELECT * FROM STUDENT WHERE ID = emp_id;
+   END//
+
+DELIMITER ;

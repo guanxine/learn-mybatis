@@ -53,3 +53,58 @@ the environment：**transactionManager**，**dataSource**
 	* url:the fully qualified path of the xml file
 	* class: the class-path of the mapper interface
 	* name:the package name of the mapper interface
+
+## Dynamic SQL
+### if
+```
+<select id = "getRecByName" parameterType = "Student" resultType = "Student">
+
+   SELECT * FROM STUDENT
+   <if test = "name != null">
+      WHERE name LIKE #{name}
+   </if>
+    <if test = "id != null">
+      AND id LIKE #{id}
+   </if>
+</select>
+```
+
+###The choose(java:switch), when, and otherwise Statements
+
+```
+<select id = "getRecByName_Id_phone" parameterType = "Student" resultType = "Student">
+   SELECT * FROM Student WHERE id != 0
+
+   <choose>
+      <when test = "name != null">
+         AND name LIKE #{name}
+      </when>
+
+      <when test = "phone != null">
+         AND phone LIKE #{phone}
+      </when>
+   </choose>
+
+</select>
+```
+
+###The where Statement(better)
+
+```
+<select id = "getName_Id_phone" parameterType = "Student" resultType = "Student">
+   SELECT * FROM STUDENT
+
+   <where>
+      <if test = "id != null">
+         id = #{id}
+      </if>
+
+      <if test = "name != null">
+         AND name LIKE #{name}
+      </if>
+   </where>
+
+</select>
+```
+
+The where element inserts a WHERE only when the containing tags return any content. Furthermore, if that content begins with AND or OR, it knows to strip it off.

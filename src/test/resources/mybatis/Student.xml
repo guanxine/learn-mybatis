@@ -1,7 +1,7 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+<!--Mapper XML file to store mapped SQL statements-->
 <mapper namespace = "Student">
 
     <!--The results of SQL SELECT statements are mapped to Java objects (beans/POJO)-->
@@ -24,7 +24,12 @@
     </insert>
 
     <update id = "update" parameterType = "Student">
-        UPDATE STUDENT SET EMAIL = #{email}, NAME = #{name}, BRANCH = #{branch}, PERCENTAGE = #{percentage}, PHONE = #{phone} WHERE ID = #{id};
+       UPDATE STUDENT SET NAME = #{name},
+         BRANCH = #{branch},
+         PERCENTAGE = #{percentage},
+         PHONE = #{phone},
+         EMAIL = #{email}
+      WHERE ID = #{id};
     </update>
 
     <delete id = "deleteById" parameterType = "int">
@@ -38,5 +43,23 @@
     <select id = "getById" parameterType = "int" resultMap = "result">
         SELECT * FROM STUDENT WHERE ID = #{id};
     </select>
+
+    <select id = "callById" resultMap = "result" parameterType = "Student" statementType = "CALLABLE">
+        {call read_recordbyid(#{id, jdbcType = INTEGER, mode = IN})}
+    </select>
+
+    <select id = "getStudentByName" parameterType = "Student" resultType = "Student">
+        SELECT * FROM STUDENT
+
+        <if test = "name != null">
+            WHERE name LIKE #{name}
+        </if>
+
+    </select>
+
+    <!--if-->
+    <!--choose (when, otherwise)-->
+    <!--trim (where, set)-->
+    <!--foreach-->
 
 </mapper>
