@@ -30,7 +30,7 @@ public class MybatisCURDByAnnotations {
     public void testInsert(){
 
         //Create a new student object
-        Student student = new Student("gx","It", 80, 984803322, "Mohammad@gmail.com" );
+        Student student = new Student("gx","It", 80, 984803322, null );
 
         //Insert student data
         studentMapper.insert(student);

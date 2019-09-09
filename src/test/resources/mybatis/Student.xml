@@ -36,7 +36,7 @@
         DELETE from STUDENT WHERE ID = #{id};
     </delete>
 
-    <select id = "getAll" resultMap = "result">
+    <select id = "getAll" resultType="java.util.HashMap">
         SELECT * FROM STUDENT;
     </select>
 

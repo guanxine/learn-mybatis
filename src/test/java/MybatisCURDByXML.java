@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -38,7 +39,7 @@ public class MybatisCURDByXML {
 
     @Test
     public void testSelectAll(){
-        List<Student> student = session.selectList("Student.getAll");
+        List<HashMap> student = session.selectList("Student.getAll");
 
         student.forEach(st->System.out.println(st.toString()));
 

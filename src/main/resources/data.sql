@@ -1,4 +1,4 @@
-CREATE TABLE  details.student(
+CREATE TABLE  student(
    ID int(10) NOT NULL AUTO_INCREMENT,
    NAME varchar(100) NOT NULL,
    BRANCH varchar(255) NOT NULL,
